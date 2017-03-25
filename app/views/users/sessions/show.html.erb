@@ -1,0 +1,7 @@
+<h3>Friends:</h3>
+<ul>
+  <% for friendship in current_user.friendships %>
+    <%= friendship.friend.email %>
+    <%= link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete %>
+  <% end %>
+</ul>
