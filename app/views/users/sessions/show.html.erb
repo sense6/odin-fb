@@ -1,7 +1,18 @@
 <h3>Friends:</h3>
 <ul>
   <% for friendship in current_user.friendships %>
-    <%= friendship.friend.email %>
-    <%= link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete %>
+    <li>
+      <%= friendship.friend.email %>
+      <%= link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete %>
+    </li>
+  <% end %>
+</ul>
+<h3>Invites:</h3>
+<ul>
+  <% current_user.receved_invites.each do |invite| %>
+    <li>
+      <%= invite.sender.email %>
+      <%= link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender) %>
+    </li>
   <% end %>
 </ul>
