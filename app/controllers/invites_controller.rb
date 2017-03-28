@@ -1,8 +1,8 @@
 class InvitesController < ApplicationController
   def create
-    #@invite = current_user.invite.build(:sender_id => current_user.id, :recever_id => params[:user_id])
     @invite = Invite.new(:sender_id => current_user.id, :recever_id => params[:recever_id])
-    if @invite.save
+    @duplication = Invite.find_by_sender_id_and_recever_id(params[:sender_id], params[:recever_id])
+    if  @duplication.blank? && @invite.save
       flash[:notice] = "Invite sent"
       redirect_to '/'
     else
@@ -15,5 +15,4 @@ class InvitesController < ApplicationController
     @invite = current_user.receved_invites.find_by(params[:id])
     @invite.destroy
   end
-
 end

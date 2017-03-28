@@ -3,7 +3,6 @@
   <% @users.each do |user| %>
     <li>
       <%= user.email %>
-      
       <%= link_to 'Invite friend', invites_create_path(:sender_id => current_user.id, :recever_id => user) %>
     </li>
   <% end %>
