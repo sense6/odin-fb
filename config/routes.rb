@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'invites/create'
 
   resources :posts
+  resources :comments
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'

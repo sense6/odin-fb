@@ -10,25 +10,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-
-        <tr>
-          <h3>Author: <%= post.user.email %> </h3>
-          <strong>
-            <h4>
-              <%= post.title %>
-            </h4>
-          </strong>
-              <%= post.body %><td>
-              <%= comment.text %>
-        </tr>
-
-        
-    <% end %>
+    <%= render @posts %>
   </tbody>
 
 </table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
