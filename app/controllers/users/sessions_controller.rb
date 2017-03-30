@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :authenticate_user!
-
+  helper_method :pending_invite?, :friend?
   # GET /resource/sign_in
   # def new
   #   super
@@ -30,4 +30,21 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  def pending_invite?(sender, recever) #invcontroller alread checks for particular invite
+    @invite = Invite.find_by(:sender_id => sender.id, :recever_id => recever.id)
+    if @invite
+      true
+    else
+      false
+    end
+  end
+
+  def friend?(current_user, user)
+    @friendship = Friendship.find_by(:user_id => current_user.id, :friend_id => user.id)
+    if @friendship
+      true
+    else
+      false
+    end
+  end
 end

@@ -2,8 +2,14 @@
 <ul>
   <% @users.each do |user| %>
     <li>
-      <%= user.email %>
-      <%= link_to 'Invite friend', invites_create_path(:sender_id => current_user.id, :recever_id => user) %>
+      <% if pending_invite?(current_user, user) %>
+        <%= user.email %> invite pending...
+      <% elsif friend?(current_user, user) %>
+      <% elsif current_user.id == user.id %>
+      <% else %>
+        <%= user.email %>
+        <%= link_to 'Invite friend', invites_create_path(:sender_id => current_user.id, :recever_id => user) %>
+      <% end %>
     </li>
   <% end %>
 </ul>

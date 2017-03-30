@@ -4,10 +4,10 @@ class InvitesController < ApplicationController
     @duplication = Invite.find_by_sender_id_and_recever_id(params[:sender_id], params[:recever_id])
     if  @duplication.blank? && @invite.save
       flash[:notice] = "Invite sent"
-      redirect_to '/'
+      redirect_to '/users'
     else
       flash[:error] = "Unable to send invite"
-      redirect_to '/'
+      redirect_to '/users'
     end
   end
 
