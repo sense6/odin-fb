@@ -1,8 +1,12 @@
+<% if @user == current_user %>
+
+<h2>profile of user: <%= @user.email %></h2>
+
 <h3>Friends:</h3>
 <ul>
   <% for friendship in current_user.friendships %>
     <li>
-      <%= friendship.friend.email %>
+      <%= link_to friendship.friend.email, show_user_path(friendship.friend.id) %>
       <%= link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete %>
     </li>
   <% end %>
@@ -11,8 +15,18 @@
 <ul>
   <% current_user.receved_invites.each do |invite| %>
     <li>
-      <%= invite.sender.email %>
+      <%= link_to invite.sender.email, show_user_path(:id => invite.sender.id) %>
       <%= link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender) %>
     </li>
   <% end %>
 </ul>
+
+ <% end %>
+<h3>Posts: </h3>
+
+    <% @posts.each do |post| %>
+      <p>Title: <%= post.title %></p>
+      <p>Body: <%= post.body %></p>
+
+      <p>likes: <%= post.likes.count %></p>
+    <% end %>

@@ -7,7 +7,7 @@
       <% elsif friend?(current_user, user) %>
       <% elsif current_user.id == user.id %>
       <% else %>
-        <%= user.email %>
+        <%= link_to user.email, show_user_path(user.id) %>
         <%= link_to 'Invite friend', invites_create_path(:sender_id => current_user.id, :recever_id => user) %>
       <% end %>
     </li>

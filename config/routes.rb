@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/" => "posts#index"
     get "/users" => "users/sessions#index"
-    get 'show_user' => "users/sessions#show"
+    get 'show_user/:id', to: "users/sessions#show", as: 'show_user'
   end
 end

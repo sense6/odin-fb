@@ -21,7 +21,8 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show
-    #@user = User.find(params[:id])
+    @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   # protected

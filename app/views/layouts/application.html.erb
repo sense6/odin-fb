@@ -15,7 +15,7 @@
     <% if user_signed_in? %>
       Signed in as: <%= current_user.email %>
       <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
-      <%= link_to 'Profile', '/show_user' %>
+      <%= link_to 'Profile', show_user_path(current_user.id) %>
       <%= link_to 'All Users', '/users' %>
     <% else %>
       <%= link_to 'Sign up', new_user_registration_path %> or
