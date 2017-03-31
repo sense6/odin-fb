@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   get 'invites/create'
 
-  resources :posts
-  resources :comments
+  get 'likes/create'
+  delete 'likes/destroy'
+
+  resources :posts, :comments
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'

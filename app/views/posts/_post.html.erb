@@ -3,6 +3,14 @@
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
 
+<p>likes: <%= post.likes.count %></p>
+
+<% if !liked?(current_user,post) %>
+  <p><%= link_to 'like it', likes_create_path(:user_id => current_user.id, :post_id => post.id) %></p>
+<% else %>
+  <p><strong><%= link_to 'unlike it', likes_destroy_path(:user_id => current_user.id, :post_id => post.id), :method => :delete %></strong></p>
+<% end %>
+
 <p>Comments: <%= render post.comments %></p>
 
 <%= form_for(:comment, url: comments_path) do |f| %>

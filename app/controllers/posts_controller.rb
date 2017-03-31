@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
+    helper_method :liked?
   # GET /posts
   # GET /posts.json
+
+  def new
+    @post = Post.new
+  end
+
   def index
     @posts = Post.all
     @users = User.all
@@ -15,9 +21,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/new
-  def new
-    @post = Post.new
-  end
+
 
   # GET /posts/1/edit
   def edit
@@ -61,6 +65,15 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def liked?(current_user,post)
+    @like = Like.find_by(:user_id => current_user.id, :post_id => post.id)
+      if @like
+        true
+      else
+        false
+      end
   end
 
   private
