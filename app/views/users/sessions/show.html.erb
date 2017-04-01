@@ -1,6 +1,9 @@
-<% if @user == current_user %>
-
 <h2>profile of user: <%= @user.email %></h2>
+
+<%= gravatar_for @user %>
+  <%= @user.email %>
+
+<% if @user == current_user %>
 
 <h3>Friends:</h3>
 <ul>

@@ -1,4 +1,6 @@
-<p>Author: <%= post.user.email %></p>
+<p>Author:</p>
+<%= gravatar_for post.user %>
+<%= post.user.email %>
 
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
