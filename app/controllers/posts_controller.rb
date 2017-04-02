@@ -6,10 +6,10 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-
   end
 
   def index
+    @post = Post.new
     timeline_ids = current_user.friends.map(&:id)
     timeline_ids << current_user.id
     @posts = Post.where(user_id:timeline_ids).order(updated_at: :desc)
@@ -27,6 +27,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
   end
 
   # POST /posts
@@ -48,9 +49,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @post = Post.find(params[:id])
+
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to '/', notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

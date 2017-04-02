@@ -1,10 +1,11 @@
-<%= form_for Post.new do |f| %>
+<%= form_for @post do |f| %>
 
   <%= f.label :title %>
   <%= f.text_field :title %><td>
 
   <%= f.label :body %>
-  <%= f.text_area :body %><td>
+  <%= f.text_area :body %></td>
 
-  <%= f.submit %>
+<p>  <%= f.submit 'Submit' %></p>
+
 <% end %>

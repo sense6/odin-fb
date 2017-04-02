@@ -21,6 +21,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show
+    @post = Post.new
     @user = User.find(params[:id])
     @posts = Post.where(user_id:@user.id).order(updated_at: :desc)
     @comments = Comment.all
