@@ -6,12 +6,13 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+
   end
 
   def index
     timeline_ids = current_user.friends.map(&:id)
     timeline_ids << current_user.id
-    @posts = Post.where(user_id:timeline_ids)
+    @posts = Post.where(user_id:timeline_ids).order(created_at: :desc)
     @comments = Comment.all
     @comment = Comment.new
   end
@@ -61,6 +62,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }

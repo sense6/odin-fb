@@ -5,6 +5,10 @@
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
 
+<% if current_user == post.user %>
+  <%= link_to 'delete post', post_path(post), :method => :delete %>
+<% end %>
+
 <p>likes: <%= post.likes.count %></p>
 
 <% if !liked?(current_user,post) %>
@@ -13,11 +17,6 @@
   <p><strong><%= link_to 'unlike it', likes_destroy_path(:user_id => current_user.id, :post_id => post.id), :method => :delete %></strong></p>
 <% end %>
 
-<p>Comments: <%= render post.comments %></p>
+<p>Comments: <%= render partial: 'comments/comment', collection: post.comments %> </p>
 
-<%= form_for(:comment, url: comments_path) do |f| %>
-  <%= f.text_field :text %>
-  <%= f.hidden_field :post_id, value: post.id %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.submit 'save' %>
-<% end %>
+<%= render 'comments/form', post: post %>

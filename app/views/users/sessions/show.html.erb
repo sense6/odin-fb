@@ -27,9 +27,4 @@
  <% end %>
 <h3>Posts: </h3>
 
-    <% @posts.each do |post| %>
-      <p>Title: <%= post.title %></p>
-      <p>Body: <%= post.body %></p>
-
-      <p>likes: <%= post.likes.count %></p>
-    <% end %>
+ <%= render partial: '/posts/post', collection: @posts %>
