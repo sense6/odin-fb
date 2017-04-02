@@ -6,6 +6,13 @@
   <%= f.label :body %>
   <%= f.text_area :body %></td>
 
+  <%= f.label :photo %>
+  <%= f.file_field :photo %>
+
+  <% if @post.photo? %>
+    delete photo?
+    <%= link_to 'Yes, delete photo', posts_delete_photo_path(post) %>
+  <% end %>
 <p>  <%= f.submit 'Submit' %></p>
 
 <% end %>

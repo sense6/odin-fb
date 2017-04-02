@@ -34,7 +34,6 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.build(post_params)
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to request.referrer, notice: 'Post was successfully created.' }
@@ -50,8 +49,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
     respond_to do |format|
+
       if @post.update(post_params)
         format.html { redirect_to '/', notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -82,7 +81,15 @@ class PostsController < ApplicationController
       end
   end
 
+  def delete_photo
+    @post = Post.find(params[:format])
+    @post.photo = nil
+    @post.save
+    redirect_to '/'
+  end
+
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
@@ -90,6 +97,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, :photo)
     end
 end

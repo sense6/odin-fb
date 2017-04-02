@@ -2,8 +2,13 @@
 <%= gravatar_for post.user %>
 <%= post.user.email %>
 
-<p>Title: <%= post.title %></p>
-<p>Body: <%= post.body %></p>
+    <% unless post.title.blank? %>
+    <p>Title: <%= post.title %></p>
+    <% end %>
+    <% unless post.title.blank? %>
+    <p>Body: <%= post.body %></p>
+    <% end %>
+ <p><%= image_tag post.photo.url(:medium) if post.photo? %></p>
 
 <% if current_user == post.user %>
   <%= link_to 'delete post', post_path(post), :method => :delete %>

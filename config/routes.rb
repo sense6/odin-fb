@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'likes/create'
   delete 'likes/destroy'
 
+  get 'posts/delete_photo', to: 'posts#delete_photo'
+
   resources :posts, :comments
 
   devise_for :users, controllers: {
