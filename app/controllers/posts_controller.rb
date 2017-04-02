@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def index
     timeline_ids = current_user.friends.map(&:id)
     timeline_ids << current_user.id
-    @posts = Post.where(user_id:timeline_ids).order(created_at: :desc)
+    @posts = Post.where(user_id:timeline_ids).order(updated_at: :desc)
     @comments = Comment.all
     @comment = Comment.new
   end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to '/', notice: 'Post was successfully created.' }
+        format.html { redirect_to request.referrer, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }

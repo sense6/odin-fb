@@ -22,7 +22,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def show
     @user = User.find(params[:id])
-    @posts = Post.where(user_id:@user.id)
+    @posts = Post.where(user_id:@user.id).order(updated_at: :desc)
     @comments = Comment.all
     @comment = Comment.new
   end
