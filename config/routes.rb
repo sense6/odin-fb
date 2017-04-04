@@ -4,8 +4,7 @@ Rails.application.routes.draw do
 
   get 'invites/create'
 
-  get 'likes/create'
-  delete 'likes/destroy'
+  resources :likes, only: [:create, :destroy]
 
   get 'posts/delete_photo', to: 'posts#delete_photo'
 
