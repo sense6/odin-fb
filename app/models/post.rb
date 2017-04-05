@@ -2,8 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }
-  file_name: { matches: [/png\z/, /jpe?g\z/, /gif\z/] },
-  size: { less_than: 2.megabytes }
+  
 
   has_many :comments, dependent: :destroy
   has_many :commenting_users, :through => :comments, :source => :user
