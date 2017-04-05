@@ -1,25 +1,27 @@
-.text-center
-  %p.navbar-text
-    = gravatar_for post.user
-    = post.user.email
-  - unless post.body.blank?
-    = post.body
 
-    = image_tag post.photo.url(:medium) if post.photo?
-  - if current_user == post.user
-    = link_to 'delete post', post_path(post), :method => :delete
-    = link_to 'edit post', edit_post_path(post)
-
-    likes:
-    = post.likes.count
-  - if !liked?(current_user,post)
-
-    = link_to 'like it', likes_path(post), :method => :post
-  - else
-
-    %strong
-      = link_to 'unlike it', like_path(post.id), :method => :delete
-  %p
-    Comments:
-    = render partial: 'comments/comment', collection: post.comments
+.media
+  .media-left
+    %img.media-object{:src => "#{h(gravatar_url(post.user))}", :style => :medium}/
+  .media-body
+    %h3.media-heading
+      = post.user.email
+      - if current_user == post.user
+        %small
+          %span.pull-right
+            = link_to 'delete post', post_path(post), :method => :delete
+            = link_to 'edit post', edit_post_path(post)
+    %h4
+      = post.body
+%h3.text-center
+  = image_tag post.photo.url(:medium) if post.photo?
+.row
+  .col-sm-4
+    - if !liked?(current_user,post)
+      = link_to 'like it', likes_path(post), :method => :post
+    - else
+      %strong
+        = link_to 'like it', like_path(post.id), :method => :delete
+    likes: #{post.likes.count}
+%h4.text-center
+  #{render partial: 'comments/comment', collection: post.comments}
   = render 'comments/form', post: post

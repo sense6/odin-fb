@@ -1,5 +1,9 @@
-%h1.text-center Timeline
-%h2.container.text-center
-  = render 'form'
+.col-sm-4
+.col-sm-4
+  .text-center
+    %h1
+      Timeline
+      = render 'form'
   %br
   = render partial: '/posts/post', collection: @posts
+.col-sm-4

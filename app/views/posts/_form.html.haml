@@ -1,14 +1,15 @@
-= form_for @post do |f|
-  = f.text_area :body
-  %br/
-  %ul.list-inline
-    %li
-      = f.label :photo
-    %li
-      = f.file_field :photo
-    %li
-      - if @post.photo?
-        = link_to 'delete photo', posts_delete_photo_path(post)
-    %li
-      %p3
-        = f.submit 'Submit'
+%h3.text.center
+  = form_for @post do |f|
+    = f.text_area :body, size: '30x5'
+    %br/
+    %ul.list-inline
+      %li
+        = f.label :photo
+      %li
+        = f.file_field :photo
+      %li
+        - if @post.photo?
+          = link_to 'delete photo', posts_delete_photo_path(post)
+      %li
+        %p3
+          = f.submit 'Submit'
