@@ -1,4 +1,3 @@
-
 .media
   .media-left
     %img.media-object{:src => "#{h(gravatar_url(post.user))}", :style => :medium}/
@@ -12,8 +11,6 @@
             = link_to 'edit post', edit_post_path(post)
     %h4
       = post.body
-%h3.text-center
-  = image_tag post.photo.url(:medium) if post.photo?
 .row
   .col-sm-4
     - if !liked?(current_user,post)
@@ -23,5 +20,5 @@
         = link_to 'like it', like_path(post.id), :method => :delete
     likes: #{post.likes.count}
 %h4.text-center
-  #{render partial: 'comments/comment', collection: post.comments}
+  = render partial: 'comments/comment', collection: post.comments
   = render 'comments/form', post: post

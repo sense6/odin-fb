@@ -1,21 +1,31 @@
-%h2
-  profile of user: #{@user.email}
-= gravatar_for @user
-= @user.email
-- if @user == current_user
-  %h3 Friends:
-  %ul
-    - for friendship in current_user.friendships
-      %li
-        = link_to friendship.friend.email, show_user_path(friendship.friend.id)
-        = link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete
-  %h3 Invites:
-  %ul
-    - current_user.receved_invites.each do |invite|
-      %li
-        = link_to invite.sender.email, show_user_path(:id => invite.sender.id)
-        = link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender)
-%h3 Posts:
-%h2 write post:
-= render 'posts/form'
-= render partial: '/posts/post', collection: @posts
+.com-sm-2
+.col-sm-5.text-center
+  %h2
+    profile of user:
+    = @user.email
+  = gravatar_for @user
+  = @user.email
+  - if @user == current_user
+    %h3 Friends:
+    %ul
+      - for friendship in current_user.friendships
+        %li
+          = link_to friendship.friend.email, show_user_path(friendship.friend.id)
+          = link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete
+    %h3 Invites:
+    %ul
+      - current_user.receved_invites.each do |invite|
+        %li
+          = link_to invite.sender.email, show_user_path(:id => invite.sender.id)
+          = link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender)
+.col-sm-5
+  .text-center
+    %h1
+      - if @user == current_user
+        write post:
+        = render 'posts/form'
+      - else
+        user's posts:
+
+  %br
+  = render partial: '/posts/post', collection: @posts

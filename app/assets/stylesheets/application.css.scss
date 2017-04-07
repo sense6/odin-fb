@@ -16,3 +16,20 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+.notification-on {
+  width: 20px;
+  height: 20px;
+}
+
+.notification-off {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar-notification-on {
+  background-color: red;
+}
+
+.navbar-notification-off {
+}

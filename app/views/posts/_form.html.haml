@@ -8,8 +8,5 @@
       %li
         = f.file_field :photo
       %li
-        - if @post.photo?
-          = link_to 'delete photo', posts_delete_photo_path(post)
-      %li
         %p3
           = f.submit 'Submit'

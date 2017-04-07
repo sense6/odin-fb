@@ -19,6 +19,10 @@
               %li= link_to 'Timeline', '/'
               %li= link_to current_user.email, show_user_path(current_user.id)
               %li= link_to 'All Users', '/users'
+              - if current_user.receved_invites.any?
+                %li.navbar-notification-on= link_to image_tag('bell.png', :class => 'notification-on'), '#'
+              - else
+                %li.navbar-notification-off= link_to image_tag('bell.png', :class => 'notification-off'), '#'
               %li= link_to 'Sign out', destroy_user_session_path, :method => :delete
             - else
               %li= link_to 'Sign in', new_user_session_path
