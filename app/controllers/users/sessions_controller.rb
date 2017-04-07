@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :authenticate_user!
-  helper_method :pending_invite?, :friend?
+  helper_method :pending_invite?, :friend?, :invited?
   # GET /resource/sign_in
   # def new
   #   super
@@ -17,13 +17,13 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def show
     @post = Post.new
     @user = User.find(params[:id])
-    @posts = Post.where(user_id:@user.id).order(updated_at: :desc)
+    @posts = Post.where(user_id:@user.id).order(updated_at: :desc).page(params[:page])
     @comments = Comment.all
     @comment = Comment.new
   end
@@ -46,6 +46,16 @@ class Users::SessionsController < Devise::SessionsController
   def friend?(current_user, user)
     @friendship = Friendship.find_by(:user_id => current_user.id, :friend_id => user.id)
     if @friendship
+      true
+    else
+      false
+    end
+  end
+
+  def invited?(current_user, user)
+    #istnieje takie zaproszenie gdzie user to sender a current user recever_id
+    @invite = Invite.find_by(:sender_id => user.id, :recever_id => current_user.id)
+    if @invite
       true
     else
       false

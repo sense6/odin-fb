@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   delete 'friendship/destroy'
 
   get 'invites/create'
+  delete 'invites/destroy'
 
   resources :likes, only: [:create, :destroy]
 

@@ -3,10 +3,10 @@ class LikesController < ApplicationController
     @like = current_user.likes.build(:post_id => params[:format])
     if @like.save
       flash[:notice] = 'liked!'
-      redirect_to '/'
+      redirect_to request.referrer
     else
       flash[:error] = 'could not like'
-      redirect_to '/'
+      redirect_to request.referrer
     end
   end
 
@@ -14,8 +14,6 @@ class LikesController < ApplicationController
     @like = current_user.likes.where(:post_id => params[:id])
     @like.destroy(@like.first)
     flash[:notice] = 'unliked'
-
-    redirect_to '/'
+    redirect_to request.referrer
   end
-
 end

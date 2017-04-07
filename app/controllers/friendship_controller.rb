@@ -8,10 +8,10 @@ class FriendshipController < ApplicationController
       flash[:notice] = "Added friend."
       @invite = current_user.receved_invites.find_by(:sender_id => params[:friend_id])
       @invite.destroy
-      redirect_to '/'
+      redirect_to request.referrer
     else
       flash[:error] = "Unable to add friend."
-      redirect_to '/'
+      redirect_to request.referrer
     end
   end
 
@@ -22,6 +22,6 @@ class FriendshipController < ApplicationController
     @friendship.destroy
     @inversed_friendship.destroy
     flash[:notice] = "Removed friend"
-    redirect_to '/'
+    redirect_to request.referrer
   end
 end

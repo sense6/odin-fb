@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     @post = Post.new
     timeline_ids = current_user.friends.map(&:id)
     timeline_ids << current_user.id
-    @posts = Post.where(user_id:timeline_ids).order(updated_at: :desc)
+    @posts = Post.where(user_id:timeline_ids).order(updated_at: :desc).page(params[:page])
     @comments = Comment.all
     @comment = Comment.new
   end

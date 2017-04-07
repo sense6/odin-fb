@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  self.per_page = 10
 
   has_many :friendships
   has_many :friends, :through => :friendships

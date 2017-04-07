@@ -1,24 +1,42 @@
-.com-sm-2
-.col-sm-5.text-center
+.col-sm-2
+.col-sm-4
   %h2
-    profile of user:
-    = @user.email
-  = gravatar_for @user
-  = @user.email
-  - if @user == current_user
-    %h3 Friends:
-    %ul
-      - for friendship in current_user.friendships
-        %li
-          = link_to friendship.friend.email, show_user_path(friendship.friend.id)
-          = link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete
-    %h3 Invites:
-    %ul
+    .media
+      .media-left
+        %img.media-object{:src => "#{h(gravatar_url(@user))}", :style => :medium}/
+      .media-body
+        %h3.media-heading
+          %span.pull-left
+            = @user.email
+            `s profile
+            %h4
+              = @user.email
+  .col-sm-5
+    - if @user == current_user
+      %h3 Friends:
+      %h4
+        - for friendship in current_user.friendships
+          .media
+            .media-left
+              %img.media-object{:src => "#{h(gravatar_url(friendship.friend.email))}",  :height => "40", :width => "40"}
+            .media-body
+              %h4.media-heading
+                %span.pull-left
+                  = link_to friendship.friend.email, show_user_path(friendship.friend.id)
+                  = link_to 'remove', friendship_destroy_path(:friend_id => current_user), :method => :delete
+      %h3 Invites:
       - current_user.receved_invites.each do |invite|
-        %li
-          = link_to invite.sender.email, show_user_path(:id => invite.sender.id)
-          = link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender)
-.col-sm-5
+        %h4
+          .media
+            .media-left
+              %img.media-object{:src => "#{h(gravatar_url(invite.sender))}",  :height => "40", :width => "40"}
+            .media-body
+              %h4.media-heading
+                %span.pull-left
+                  = link_to invite.sender.email, show_user_path(:id => invite.sender.id)
+                  = link_to 'Accept invite', friendship_create_path(:friend_id => invite.sender)
+                  = link_to 'Delete invite', invites_destroy_path(:id => invite.id), :method => :delete
+.col-sm-4
   .text-center
     %h1
       - if @user == current_user
@@ -28,4 +46,5 @@
         user's posts:
 
   %br
+  = will_paginate @posts
   = render partial: '/posts/post', collection: @posts

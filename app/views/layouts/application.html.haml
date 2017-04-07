@@ -14,6 +14,7 @@
     .navbar.navbar-default
       .container
         .collapse.navbar-collapse
+          = link_to 'BŁĘDY, SUGESTIE', 'http://goo.gl/n8jYOd'
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li= link_to 'Timeline', '/'
