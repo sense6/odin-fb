@@ -14,7 +14,8 @@ class InvitesController < ApplicationController
   end
 
   def destroy
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find(params[:id]) rescue nil
+    @invite ||= Invite.find_by(:sender_id => params[:sender_id], :recever_id => params[:recever_id])
     @invite.destroy
     redirect_to request.referrer
   end

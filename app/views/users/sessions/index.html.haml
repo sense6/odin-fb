@@ -13,7 +13,7 @@
             friend
           - elsif invited?(current_user,user)
             = link_to 'Accept invite', friendship_create_path(:friend_id => user.id)
+            = link_to 'Delete invite', invites_destroy_path(:sender_id => user.id, :recever_id => current_user.id), :method => :delete
           - else
             = link_to 'Invite friend', invites_create_path(:sender_id => current_user.id, :recever_id => user)
-
 .col-sm-4

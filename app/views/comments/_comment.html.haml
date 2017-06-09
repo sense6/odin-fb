@@ -4,7 +4,6 @@
   .media-body
     %h4.media-heading
       %small
-        %i= comment.created_at
     %p
       = comment.text
       - if current_user == comment.user

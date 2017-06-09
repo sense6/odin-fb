@@ -28,10 +28,10 @@ class CommentsController < ApplicationController
 
       if @comment.save
         flash[:notice] = 'comment saved'
-        redirect_to '/posts'
+        redirect_to request.referrer
       else
         flash[:error] = 'no comment'
-        redirect_to '/posts'
+        redirect_to request.referrer
       end
   end
 
